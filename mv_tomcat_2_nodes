@@ -49,3 +49,14 @@
       src: /home/app/target/hello-1.0.war
       dest: /tmp/hello-1.0.war
       mode: pull
+
+- name: deploy app
+  hosts: tom
+  become: yes
+
+  tasks:
+  - name: copy to tom
+    synchronize:
+      src: /tmp/hello-1.0.war
+      dest: /var/lib/tomcat9webapps/hello-1.0.war
+      mode: push
