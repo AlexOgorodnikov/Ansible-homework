@@ -44,17 +44,7 @@
   become: yes
 
   tasks:
-  - name: copy war file to local
-    fetch:
-      src: /home/app/target/*.war
-      dest: /tmp/fetched
-
-- name: deploy app
-  hosts: tom
-  become: yes
-
-  tasks:
-  - name: copy war file from local
+  - name: test deploy war file
     copy:
       src: /home/app/target/*.war
-      dest: /var/lib/tomcat9/webapps
+      dest: root@51.250.70.180:/var/lib/tomcat9/webapps
