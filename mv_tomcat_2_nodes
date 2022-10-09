@@ -57,7 +57,5 @@
   tasks:
   - name: copy to tom
     synchronize:
-      src: rsync://localhost/tmp/hello-1.0.war
+      src: /tmp/hello-1.0.war
       dest: /var/lib/tomcat9/webapps/hello-1.0.war
-      mode: pull
-      delegate_to: 51.250.70.180 
