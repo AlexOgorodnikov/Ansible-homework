@@ -1,0 +1,49 @@
+---
+- name: create app file ready to deploy
+  hosts: mvn
+  become: yes 
+
+  tasks: 
+  - name: ensure git packages is present
+    apt:
+      name: git
+      state: present
+  - name: ensure jdk is present
+    apt:
+      name: default-jdk
+      state: present
+  - name: ensure maven is present
+    apt:
+      name: maven
+      state: present
+  - name: make directory for git pull and packages
+    file:
+      path: /home/app
+      state: directory
+  - name: git pull
+    ansible.builtin.git:
+      repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
+      dest: /home/app  
+  - name: make war file
+    ansible.builtin.shell:
+      chdir: /home/app
+      cmd: mvn package
+
+- name: install tomcat
+  hosts: tom
+  become: yes
+
+  tasks:
+  - name: ensure tomcat is present
+    apt:
+      name: tomcat9
+      state: present
+- name: deploy app
+  hosts: mvn
+  become: yes
+
+  tasks:
+  - name: deploy web app
+    ansible.builtin.copy:
+      src: /home/app/target/*.war
+    dest: tom:/var/lib/tomcat9/webapps
