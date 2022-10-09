@@ -38,12 +38,22 @@
     apt:
       name: tomcat9
       state: present
+
 - name: deploy app
   hosts: mvn
   become: yes
 
   tasks:
-  - name: deploy web app
+  - name: copy war file
+    fetch:
+      src: /home/app/target/*.war
+      dest: /var/lib/tomcat9/webapps
+- name: deploy app
+  hosts: tom
+  become: yes
+
+  tasks:
+  - name: copy war file
     copy:
       src: /home/app/target/*.war
-    dest: 51.250.65.220:/var/lib/tomcat9/webapps
+      dest: /var/lib/tomcat9/webapps
