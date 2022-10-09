@@ -21,11 +21,11 @@
       path: /home/app
       state: directory
   - name: clone code from git
-    ansible.builtin.git:
+    git:
       repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
       dest: /home/app  
   - name: make war file
-    ansible.builtin.shell:
+    shell:
       chdir: /home/app
       cmd: mvn package
 
@@ -44,6 +44,6 @@
 
   tasks:
   - name: deploy web app
-    ansible.builtin.copy:
+    copy:
       src: /home/app/target/*.war
     dest: tom:/var/lib/tomcat9/webapps
