@@ -1,6 +1,6 @@
 ---
-- name: create app file ready to deploy
-  hosts: mvn
+- name: Repo and cache servers update
+  hosts: all
   become: yes 
 
   tasks:
@@ -9,19 +9,21 @@
       update_cache: yes
       force_apt_get: yes
       cache_valid_time: 3600
+      
+- name: create app file ready to deploy
+  hosts: mvn
+  become: yes
 
-  - name: ensure git packages is present
+  tasks:  
+  - name: ensure git, jdk, maven packages is present
     apt:
-      name: git
+      name: "{{item}}"
       state: present
-  - name: ensure jdk is present
-    apt:
-      name: default-jdk
-      state: present
-  - name: ensure maven is present
-    apt:
-      name: maven
-      state: present
+    with_items:
+      - git
+      - default-jdk
+      - maven  
+  
   - name: make directory for git pull and packages
     file:
       path: /home/app
@@ -39,13 +41,7 @@
   hosts: tom
   become: yes
     
-  tasks:
-  - name: repo and cahe update
-    apt:
-      update_cache: yes
-      force_apt_get: yes
-      cache_valid_time: 3600
-
+  tasks: 
   - name: ensure tomcat is present
     apt:
       name: tomcat9
