@@ -44,8 +44,8 @@
   become: yes
 
   tasks:
-  - name: copy to tom
+  - name: copy to local
     synchronize:
       src: /home/app/target/hello-1.0.war
-      dest: rsync://tom/var/lib/tomcat9/webapps/hello-1.0.war
-      delegate_to: mvn
+      dest: /tmp/hello-1.0.war
+      delegate_to: 51.250.65.220
