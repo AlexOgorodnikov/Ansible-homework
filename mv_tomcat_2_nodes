@@ -20,7 +20,7 @@
     file:
       path: /home/app
       state: directory
-  - name: git pull
+  - name: clone code from git
     ansible.builtin.git:
       repo: 'https://github.com/boxfuse/boxfuse-sample-java-war-hello.git'
       dest: /home/app  
