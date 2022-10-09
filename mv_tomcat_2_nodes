@@ -47,7 +47,7 @@
   - name: copy war file to local
     fetch:
       src: /home/app/target/*.war
-      dest: /tmp
+      dest: /tmp/fetched
 
 - name: deploy app
   hosts: tom
@@ -56,5 +56,5 @@
   tasks:
   - name: copy war file from local
     copy:
-      src: /tmp/*.war
+      src: /home/app/target/*.war
       dest: /var/lib/tomcat9/webapps
