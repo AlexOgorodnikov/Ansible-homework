@@ -47,4 +47,5 @@
   - name: copy to tom
     synchronize:
       src: /home/app/target/hello-1.0.war
-      dest: rsync://root@51.250.70.180/var/lib/tomcat9/webapps/hello-1.0.war
+      dest: rsync://tom/var/lib/tomcat9/webapps/hello-1.0.war
+      delegate_to: mvn
