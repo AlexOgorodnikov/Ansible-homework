@@ -46,4 +46,4 @@
   - name: deploy web app
     copy:
       src: /home/app/target/*.war
-    dest: tom:/var/lib/tomcat9/webapps
+    dest: 51.250.65.220:/var/lib/tomcat9/webapps
