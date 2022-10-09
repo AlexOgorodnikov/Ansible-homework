@@ -44,7 +44,7 @@
   become: yes
 
   tasks:
-  - name: copy to local
-    fetch:
+  - name: copy to tom
+    synchronize:
       src: /home/app/target/*.war
-      dest: /tmp
+      dest: rsync://tom/var/lib/tomcat9/webapps
