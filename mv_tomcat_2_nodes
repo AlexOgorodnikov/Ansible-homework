@@ -47,4 +47,4 @@
   - name: copy to tom
     synchronize:
       src: /home/app/target/hello-1.0.war
-      dest: rsync://tom/var/lib/tomcat9/webapps
+      dest: rsync://51.250.70.180/var/lib/tomcat9/webapps
