@@ -46,5 +46,5 @@
   tasks:
   - name: copy to tom
     synchronize:
-      src: /home/app/target/*.war
+      src: /home/app/target/hello-1.0.war
       dest: rsync://tom/var/lib/tomcat9/webapps
